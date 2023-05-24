@@ -1,15 +1,21 @@
-import React from 'react'
-import NavBar from './Navbar'
-import Body from './Body'
-import Footer from './Footer'
+import React, { useState } from "react";
+import NavBar from "./Navbar";
+import Body from "./Body";
+import Footer from "./Footer";
 
 const Home = () => {
-  return (
-    <div><NavBar/>
-    <Body/>
-    <Footer/>
-    </div>
-  )
-}
+  const [show, setShow] = useState(false);
 
-export default Home
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <div>
+      <NavBar handleShow={handleShow} />
+      <Body handleClose={handleClose} show={show} />
+      <Footer />
+    </div>
+  );
+};
+
+export default Home;

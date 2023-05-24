@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import CartCtx from "../Store/CartContex";
 
 const CardComponent = (props) => {
-  console.log(props);
-  const { title, price, image } = props;
+ const ctxData=useContext(CartCtx)
+  const { title, price, image, } = props;
 
   return (
   
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: "14rem", margin:"auto"}}>
         <Card.Img variant="top" src={image} />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
@@ -19,7 +20,8 @@ const CardComponent = (props) => {
             <Button
               variant="primary"
               style={{ width: "109px", height: "36px" }}
-              className=""
+              onClick={()=>{ctxData.getCartDataFunc(props)}}
+         
             >
               Add to cart
             </Button>

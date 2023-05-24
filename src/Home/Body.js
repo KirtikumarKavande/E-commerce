@@ -1,10 +1,12 @@
 import React from "react";
 import CardComponent from "./Card";
 import { Col, Row } from "react-bootstrap";
+import CartItem from "../Cart/CartItem";
 
-const Body = () => {
+const Body = ({ handleClose, show}) => {
   const productsArr = [
     {
+      id: 1,
       title: "Colors",
 
       price: 100,
@@ -14,6 +16,7 @@ const Body = () => {
     },
 
     {
+      id: 2,
       title: "Black and white Colors",
 
       price: 50,
@@ -23,6 +26,7 @@ const Body = () => {
     },
 
     {
+      id: 3,
       title: "Yellow and Black Colors",
 
       price: 70,
@@ -32,6 +36,7 @@ const Body = () => {
     },
 
     {
+      id: 4,
       title: "Blue Color",
 
       price: 100,
@@ -42,23 +47,24 @@ const Body = () => {
   ];
 
   return (
-    <div className="container m-auto">
-        
-      <Row>
-        {productsArr.map((item) => (
-          <Col xs={6}>
-          <CardComponent
-              title={item.title}
-              price={item.price}
-              image={item.imageUrl}
-            />
-          </Col>
-        ))}
-      </Row>
+    <div>
+       <CartItem  handleClose={handleClose} show={show}/>
+      <div className="container " >
+        <Row>
+          {productsArr.map((item) => (
+            <Col lg={6} md={6} sm={12} key={item.id}>
+              <CardComponent
+                title={item.title}
+                price={item.price}
+                image={item.imageUrl}
+                id={item.id}
+              />
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   );
 };
 
 export default Body;
-
-
