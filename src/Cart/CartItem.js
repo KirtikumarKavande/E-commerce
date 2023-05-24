@@ -8,7 +8,7 @@ const CartItem = ({ handleClose, show }) => {
   const ctxData = useContext(CartCtx);
   return (
     <div>
-      <Modal show={show} onHide={handleClose} style={{maxHeight:"30rem",overflow:"scroll"}}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -39,16 +39,17 @@ const CartItem = ({ handleClose, show }) => {
                       <Col xs={2}>{item.title}</Col>
 
                       <Col xs={2}>{item.price}</Col>
-                      <Col xs={2}>-</Col>
+                      <Col xs={2}>{item.quantity}</Col>
                       <Col xs={3}>
                         <Button
                           size="sm"
                           variant="success"
                           style={{ marginRight: "10px" }}
+                          onClick={()=>{ctxData.addItemToCartFunc(item)}}
                         >
                           +
                         </Button>
-                        <Button variant="danger" size="sm">
+                        <Button variant="danger" size="sm" onClick={()=>{ctxData.removeItemFromCartFunc(item)}}>
                           -
                         </Button>
                       </Col>

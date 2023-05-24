@@ -20,7 +20,7 @@ const CardComponent = (props) => {
             <Button
               variant="primary"
               style={{ width: "109px", height: "36px" }}
-              onClick={()=>{ctxData.getCartDataFunc(props)}}
+              onClick={()=>{ctxData.addItemToCartFunc(props)}}
          
             >
               Add to cart

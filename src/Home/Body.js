@@ -3,7 +3,7 @@ import CardComponent from "./Card";
 import { Col, Row } from "react-bootstrap";
 import CartItem from "../Cart/CartItem";
 
-const Body = ({ handleClose, show}) => {
+const Body = ({ handleClose, show }) => {
   const productsArr = [
     {
       id: 1,
@@ -13,6 +13,7 @@ const Body = ({ handleClose, show}) => {
 
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+      
     },
 
     {
@@ -23,6 +24,7 @@ const Body = ({ handleClose, show}) => {
 
       imageUrl:
         "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+        
     },
 
     {
@@ -48,8 +50,8 @@ const Body = ({ handleClose, show}) => {
 
   return (
     <div>
-       <CartItem  handleClose={handleClose} show={show}/>
-      <div className="container " >
+      <CartItem handleClose={handleClose} show={show} />
+      <div className="container ">
         <Row>
           {productsArr.map((item) => (
             <Col lg={6} md={6} sm={12} key={item.id}>
