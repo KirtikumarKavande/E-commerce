@@ -2,8 +2,12 @@ import React from "react";
 import CardComponent from "./Card";
 import { Col, Row } from "react-bootstrap";
 import CartItem from "../Cart/CartItem";
+import { useOutletContext } from "react-router-dom";
 
-const Body = ({ handleClose, show }) => {
+const Body = () => {
+  const [show, handleShow,handleClose] = useOutletContext();
+  console.log('show',show)
+  
   const productsArr = [
     {
       id: 1,

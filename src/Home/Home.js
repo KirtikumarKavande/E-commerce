@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "./Navbar";
 import Body from "./Body";
 import Footer from "./Footer";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   const [show, setShow] = useState(false);
@@ -12,7 +13,7 @@ const Home = () => {
   return (
     <div>
       <NavBar handleShow={handleShow} />
-      <Body handleClose={handleClose} show={show} />
+      <Outlet context={[show, handleShow,handleClose]} />
       <Footer />
     </div>
   );
