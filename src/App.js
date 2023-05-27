@@ -7,6 +7,8 @@ import Root from "./Root";
 import { useState } from "react";
 import Body from "./Home/Body";
 import ErrorShow from "./ErrorShow";
+import AlbumDetails from "./Pages/AlbumDetails";
+import Contact from "./Pages/Contact";
 
 
 const myrouter= createBrowserRouter([
@@ -16,9 +18,13 @@ const myrouter= createBrowserRouter([
     element:<Home/>,
     errorElement:<ErrorShow/>,
     children:[
-      {path:'/',element:<Body/>},
-      {path:'/about', element:<About/>},
-      {path:'/album',element:<Album/>},
+      {index:true,element:<Body/>},
+      {path:'about', element:<About/>},
+      {path:'album',element:<Album/>},
+      {path:'contactUs',element:<Contact/>},
+
+      {path:'album/:details',element:<AlbumDetails/>},
+
     ]
   }
 ]);

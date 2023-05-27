@@ -59,6 +59,17 @@ const NavBar = ({ handleShow }) => {
             >
               About
             </NavLink>
+            <NavLink
+              to="/contactUs"
+              className={({ isActive }) => (isActive ? "activeLink" : "")}
+              style={{
+                color: "white",
+                textDecoration: "none",
+                marginRight: "2rem",
+              }}
+            >
+              Contact
+            </NavLink>
           </Nav>
           <Navbar.Collapse className="justify-content-end">
             <Button variant="primary" onClick={handleShow} >
