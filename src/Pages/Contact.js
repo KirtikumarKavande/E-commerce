@@ -27,6 +27,9 @@ const Contact = () => {
         }
       );
     }
+    nameRef.current.value=''
+    emailRef.current.value=''
+    phoneRef.current.value=''
     sendContactUsData()
   };
   return (
