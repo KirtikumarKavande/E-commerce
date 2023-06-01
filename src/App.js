@@ -10,6 +10,7 @@ import ErrorShow from "./ErrorShow";
 import AlbumDetails from "./Pages/AlbumDetails";
 import Contact from "./Pages/Contact";
 import Product from "./Pages/Product";
+import Login from "./Pages/Login";
 
 
 const myrouter= createBrowserRouter([
@@ -24,6 +25,8 @@ const myrouter= createBrowserRouter([
       {path:'about', element:<About/>},
       {path:'album',element:<Album/>},
       {path:'contactUs',element:<Contact/>},
+      {path:'login',element:<Login/>},
+
 
       {path:'album/:details',element:<AlbumDetails/>},
 
