@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { LoginToken } from "../Store/Login/LoginContext";
 
 const Login = () => {
+   const ctxData= useContext(LoginToken)
    const navigate=useNavigate()
   const emailRef = useRef();
   const passRef = useRef();
@@ -28,8 +30,10 @@ const Login = () => {
       )
           const res=await response.json()
           if(res.idToken){
+            ctxData.isLoggedIn(res.idToken)
+          localStorage.setItem('email',res.email)
+
             navigate('/album')
-            localStorage.setItem("idToken", res.idToken)
           }else{
             alert('you entered wrong Pawsword')
           }

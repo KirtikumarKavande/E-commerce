@@ -8,10 +8,11 @@ import CartCtx from "../Store/CartContex";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+import { LoginToken } from "../Store/Login/LoginContext";
 
 const NavBar = ({ handleShow }) => {
   const ctxData = useContext(CartCtx);
-
+  const LoginData=useContext(LoginToken);
   let quantity = 0;
   ctxData.cartData.map((item) => {
     quantity = quantity + item.quantity;
@@ -22,17 +23,20 @@ const NavBar = ({ handleShow }) => {
         <Container>
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
+            {!!LoginData.token &&
             <NavLink
-              to="/album"
-              className={({ isActive }) => (isActive ? "activeLink" : "")}
-              style={{
-                color: "white",
-                textDecoration: "none",
-                marginRight: "2rem",
-              }}
-            >
-              Album
-            </NavLink>
+            to="/album"
+            className={({ isActive }) => (isActive ? "activeLink" : "")}
+            style={{
+              color: "white",
+              textDecoration: "none",
+              marginRight: "2rem",
+            }}
+          >
+            Album
+          </NavLink>
+            }
+            
 
             <NavLink
               to="/"
@@ -70,17 +74,21 @@ const NavBar = ({ handleShow }) => {
             >
               Contact
             </NavLink>
+            {!!!LoginData.token &&
+            
             <NavLink
-              to="/login"
-              className={({ isActive }) => (isActive ? "activeLink" : "")}
-              style={{
-                color: "white",
-                textDecoration: "none",
-                marginRight: "2rem",
-              }}
-            >
-            Login
-            </NavLink>
+            to="/login"
+            className={({ isActive }) => (isActive ? "activeLink" : "")}
+            style={{
+              color: "white",
+              textDecoration: "none",
+              marginRight: "2rem",
+            }}
+          >
+          Login
+          </NavLink>
+            }
+           
           </Nav>
           <Navbar.Collapse className="justify-content-end">
             <Button variant="primary" onClick={handleShow} >

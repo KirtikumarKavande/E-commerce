@@ -26,7 +26,7 @@ const CartItem = ({ handleClose, show }) => {
                   <Col style={{fontWeight:"bold"}}  xs={3}>ADD</Col>
                 </Row>
                 <Row>
-                  {ctxData.cartData.map((item) => (
+                  {ctxData?.cartData?.map((item) => (
                     <>
                       <Col xs={3}>
                         <img

@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartCtx from "./CartContex";
 
 const CartContextProvider = (props) => {
-  const [cartItem, setCartItem] = useState([]);
+  const [newData, setNewData] = useState([]);
+  const [originalCartItem, setOrignalCartItem] = useState([]);
+  const[updatedIndex,setUpdatedIndex] = useState(-1)
+  const[id,setId]=useState(null)
+  console.log("original", originalCartItem);
+  console.log("newData", newData);
+
+  const [cartItem, setCartItem] = useState(originalCartItem);
   const addItemToCartFunc = (item) => {
     const itemWIthQuantity = { ...item, quantity: 1 };
     const index = obj.cartData.findIndex((object) => {
@@ -35,13 +42,80 @@ const CartContextProvider = (props) => {
 
     setCartItem(newUpdatedObj);
   };
-  
+
   const obj = {
     cartData: cartItem,
     addItemToCartFunc: addItemToCartFunc,
     removeItemFromCartFunc: removeItemFromCartFunc,
   };
- 
+  const email = localStorage.getItem("email");
+  const newEmail = email?.replace(/[^a-zA-Z\s]/g, "");
+  console.log("newEmail", obj);
+
+  useEffect(() => {
+    fetch(`https://crudcrud.com/api/1673ba4d8ea742a49f310ec6ddb22cca/${newEmail}`)
+      .then((response) => response.json())
+      .then((data) => {
+       
+
+        const index = data.findIndex((object) => {
+          return String(object.email) === String(newEmail);
+        });
+        setNewData(data);
+
+        
+        if (index > -1) {
+          console.log("underIndex", index);
+          setCartItem(data[index]?.data);
+          console.log("evalute useEffect");
+          
+        }
+      });
+  }, [newEmail,updatedIndex]);
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    let newEmail = email?.replace(/[^a-zA-Z\s]/g, "");
+    const token = localStorage.getItem("token");
+
+    const newObj = {
+      email: newEmail,
+      data: obj.cartData,
+    };
+    let index = newData?.findIndex((object) => {
+      return String(object.email) === String(newEmail);
+    });
+    console.log('imp',index)
+    if (!!token && obj.cartData.length > 0) {
+      if (updatedIndex < 0) {
+        setUpdatedIndex(0)
+        console.log("post");
+        fetch(
+          `https://crudcrud.com/api/1673ba4d8ea742a49f310ec6ddb22cca/${newEmail}`,
+          {
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            method: "POST",
+            body: JSON.stringify(newObj),
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+      } else {
+        console.log("put");
+        const id = newData[updatedIndex]?._id;
+        console.log(id)
+        fetch(
+          `https://crudcrud.com/api/1673ba4d8ea742a49f310ec6ddb22cca/${newEmail}/${id}`,
+          {
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            method: "PUT",
+            body: JSON.stringify(newObj),
+          }
+        ).then((response) => console.log(response));
+      }
+    }
+  }, [obj.cartData]);
+
   return (
     <div>
       <CartCtx.Provider value={obj}>{props.children}</CartCtx.Provider>
