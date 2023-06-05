@@ -53,7 +53,7 @@ const CartContextProvider = (props) => {
   console.log("newEmail", obj);
 
   useEffect(() => {
-    fetch(`https://crudcrud.com/api/1673ba4d8ea742a49f310ec6ddb22cca/${newEmail}`)
+    fetch(`https://crudcrud.com/api/ee6c577404a94ec5a375eb1377309fc8/${newEmail}`)
       .then((response) => response.json())
       .then((data) => {
        
@@ -91,7 +91,7 @@ const CartContextProvider = (props) => {
         setUpdatedIndex(0)
         console.log("post");
         fetch(
-          `https://crudcrud.com/api/1673ba4d8ea742a49f310ec6ddb22cca/${newEmail}`,
+          `https://crudcrud.com/api/ee6c577404a94ec5a375eb1377309fc8/${newEmail}`,
           {
             headers: { "Content-Type": "application/json; charset=utf-8" },
             method: "POST",
@@ -105,7 +105,7 @@ const CartContextProvider = (props) => {
         const id = newData[updatedIndex]?._id;
         console.log(id)
         fetch(
-          `https://crudcrud.com/api/1673ba4d8ea742a49f310ec6ddb22cca/${newEmail}/${id}`,
+          `https://crudcrud.com/api/ee6c577404a94ec5a375eb1377309fc8/${newEmail}/${id}`,
           {
             headers: { "Content-Type": "application/json; charset=utf-8" },
             method: "PUT",

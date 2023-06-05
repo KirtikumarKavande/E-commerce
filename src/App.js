@@ -6,18 +6,25 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Album from "./Pages/Album";
-import About from "./Pages/About";
+// import About from "./Pages/About";
 import Root from "./Root";
 import { useState } from "react";
+import { lazy, Suspense } from "react";
 import Body from "./Home/Body";
 import ErrorShow from "./ErrorShow";
 import AlbumDetails from "./Pages/AlbumDetails";
 import Contact from "./Pages/Contact";
-import Product from "./Pages/Product";
+// import Product from "./Pages/Product";
 import Login from "./Pages/Login";
 import { LoginToken } from "./Store/Login/LoginContext";
 
+const About=lazy(()=>import('./Pages/About'))   
+
+const Product=lazy(()=>import('./Pages/Product'))
+
 const App = () => {
+
+
   const ctxstatus = useContext(LoginToken);
 
   const myrouter = createBrowserRouter([
@@ -30,9 +37,9 @@ const App = () => {
 
         {
           path: "/:productDetails",
-          element: !!ctxstatus.token ? <Product /> : <Login />,
+          element: !!ctxstatus.token ? <Suspense><Product /> </Suspense>: <Login />,
         },
-        { path: "about", element: <About /> },
+        { path: "about", element: <Suspense fallback={<p>Loading......</p>}><About/></Suspense> },
         { path: "album", element: <Album /> },
         { path: "contactUs", element: <Contact /> },
         {
@@ -43,7 +50,7 @@ const App = () => {
             <p>you are already looged in</p>
           ),
         },
-
+ 
         { path: "album/:details", element: <AlbumDetails /> },
       ],
     },
